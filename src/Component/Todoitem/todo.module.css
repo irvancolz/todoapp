@@ -1,0 +1,24 @@
+.container{
+    width: 235px;
+    padding: 1.75rem 1.8rem;
+    aspect-ratio: 1;
+    border-radius: .75rem;
+    background-color: var(--white-bg-col);
+    box-shadow: 0px .25rem .7rem var(--shadow-bg-col);
+    display: flex;
+    flex-direction: column;
+}
+.container > a{
+    flex-grow: 1;
+    overflow: hidden;
+}
+.footer{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+.date{
+    font-weight: 500;
+    font-size: .8rem;
+    color: var(--passive-text-col);
+}

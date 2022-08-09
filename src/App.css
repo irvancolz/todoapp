@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
 :root{
+  font-size: 16px;
   --very-high-prior-col: rgba(237, 76, 92, 1);
   --high-prior-col: rgba(248, 165, 65, 1);
   --medium-prior-col: rgba(0, 167, 144, 1);
@@ -7,17 +8,71 @@
   --very-low-prior-col: rgba(137, 66, 193, 1);
   --blue-bg-col: rgba(22, 171, 248, 1);
   --white-bg-col: rgba(255, 255, 255, 1);
-  --gray-bg-col: #E5E5E5;
+  --gray-bg-col: #f4f4f4;
   --passive-text-col: rgba(136, 136, 136, 1);
   ---main-text-col: rgba(17, 17, 17, 1);
+  --shadow-bg-col: rgba(0, 0, 0, 0.1);
 }
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+.App .container:nth-child(2){
+  padding: 2.8rem 0;
+}
+a{
+  text-decoration: none;
+  cursor: pointer;
+  color: var(---main-text-col);
+}
 body{
   font-family: 'Poppins', sans-serif;
   background-color: var(--gray-bg-col);
   color: var(---main-text-col);
 }
+.container{
+  width: 100%;
+  max-width: 1280px;
+  padding: 0 2rem;
+  margin: auto;
+}
+.title{
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+button{
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+@media (max-width: 1400px){
+  .container{
+      max-width: 1280px;
+    }
+  }
+  @media (max-width: 1200px){
+  .container{
+      max-width: 1140px;
+    }
+  }
+  @media (max-width: 992px){
+  .container{
+      max-width: 960px;
+    }
+  }
+  @media (max-width: 768px){
+  .container{
+      max-width: 720px;
+    }
+  }
+  @media (max-width: 576px){
+  .container{
+    max-width: 540px;
+    width: 100%;
+    }
+    .App .container:nth-child(2){
+      padding: 0;
+    }
+  }

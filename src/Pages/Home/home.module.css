@@ -1,0 +1,27 @@
+.imgContainer{
+    position: relative;
+    width: 100%;
+}
+.img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: 100%;
+}
+.header{
+    margin: 3rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.txt{
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--white-bg-col);
+}
+@media(max-width: 600px){
+    .imgContainer{
+        width: 100vw;
+    }
+}

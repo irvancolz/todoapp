@@ -1,0 +1,80 @@
+.container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    z-index: 10;
+}
+.formContainer{
+    position: relative;
+    padding: 1.4rem 1.8rem;
+    background-color: var(--white-bg-col);
+    border-radius: .75rem;
+    animation: fade-in .4s ease-in;
+    box-shadow: 0px .25rem .7rem var(--shadow-bg-col);
+    width: 51.8rem;
+}
+.title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.title::before{
+    content: '';
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: var(--gray-bg-col);
+}
+.form, .formContainer{
+    display: flex;
+    gap: 1.5rem;
+    flex-direction: column;
+}
+.form{
+    gap: 2rem;
+}
+.formgroup:last-child{
+    transition: opacity .5s ease-in-out;
+}
+.form .formgroup:last-child > div{
+    margin-left: auto;
+}
+.formgroup:first-child input{
+    width: 100%;
+    padding: .8rem 1.1rem;
+    font-size: 1rem;
+    border: 1px solid var(--shadow-bg-col);
+    outline: 1px solid var(--shadow-bg-col);
+    border-radius: .3rem;
+    transition: border .3s ease-in-out, outline .3s ease-in-out;
+}
+.formgroup:first-child input::placeholder{
+    color: var(--shadow-bg-col);
+}
+.formgroup:first-child input:focus{
+    border: 1px solid var(--blue-bg-col);
+    outline: 1px solid var(--blue-bg-col);
+}
+.formgroup:focus-within ~ .formgroup:last-child > div{
+   opacity: 1;
+}
+@media(max-width: 600px){
+    .formContainer{
+        width: 20rem;
+    }
+}
+@keyframes fade-in{
+    from{
+        opacity: 0;
+        transform: translateY(1rem);
+    }to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

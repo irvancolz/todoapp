@@ -1,0 +1,13 @@
+.container{
+    background-color: var(--blue-bg-col);
+    height: 105px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title{
+    color: var(--white-bg-col);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+

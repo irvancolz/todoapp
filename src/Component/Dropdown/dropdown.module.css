@@ -1,0 +1,25 @@
+.menu{
+    background-color: var(--white-bg-col);
+    padding: .8rem 1.1rem;
+    border: 1px solid rgba(229, 229, 229, 1);
+}
+.dropdown{
+    border: 1px solid rgba(229, 229, 229, 1);
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    border-radius: .4rem;
+    width: 200px;
+    position: relative;
+}
+.dropdown > *{
+    flex-basis: 100%;
+}
+input[type= 'radio']{
+    /* opacity: 0; */
+}
+.txt{
+    font-size: .8rem;
+    font-weight: 400;
+    margin-left: 1.25rem;
+}

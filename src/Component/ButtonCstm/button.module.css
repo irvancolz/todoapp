@@ -1,0 +1,22 @@
+.btn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+.container{
+    width: fit-content;
+    background-color: var(--bg);
+}
+.container.prime, .container.second{
+    width: 9.15rem;
+    padding: .9rem 1.4rem;
+    border-radius: 2rem;
+}
+.btn.white *{
+    color: var(--white-bg-col);
+}
+.btn.default *{
+    color: var(--main-text-col);
+}
