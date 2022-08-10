@@ -1,5 +1,4 @@
 .container{
-    width: 235px;
     padding: 1.75rem 1.8rem;
     aspect-ratio: 1;
     border-radius: .75rem;
@@ -9,7 +8,9 @@
     flex-direction: column;
 }
 .container > a{
+    position: relative;
     flex-grow: 1;
+    max-width: 100%;
     overflow: hidden;
 }
 .footer{
@@ -21,4 +22,12 @@
     font-weight: 500;
     font-size: .8rem;
     color: var(--passive-text-col);
+}
+@media(max-width: 600px){
+    .container{
+        padding: .75rem;
+    }
+    .footer{
+        gap: 1rem;
+    }
 }

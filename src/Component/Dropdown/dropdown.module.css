@@ -1,8 +1,9 @@
-.menu{
-    background-color: var(--white-bg-col);
-    padding: .8rem 1.1rem;
-    border: 1px solid rgba(229, 229, 229, 1);
+.container{
+    position: relative;
+    z-index: 2;
+    width: fit-content;
 }
+
 .dropdown{
     border: 1px solid rgba(229, 229, 229, 1);
     display: flex;
@@ -10,16 +11,58 @@
     overflow: hidden;
     border-radius: .4rem;
     width: 200px;
-    position: relative;
 }
 .dropdown > *{
     flex-basis: 100%;
 }
 input[type= 'radio']{
-    /* opacity: 0; */
+    opacity: 0;
 }
+.wrapper{
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px .25rem .7rem var(--shadow-bg-col);
+}
+.menu{
+    background-color: var(--white-bg-col);
+    padding: .8rem 1.1rem;
+    border: 1px solid rgba(229, 229, 229, 1);
+    cursor: pointer;
+    transition: background-color .3s ease-in-out;
+    position: relative;
+}
+.dropdown > .menu::after{
+    content: '\005e';
+    position: absolute;
+    right: 1em;
+    transition: transform .5s ease-in;
+
+}
+.wrapper > .menu.active::after{
+    content: '\2713';
+    position: absolute;
+    right: 1em;
+}
+.circle{
+    display: inline-block;
+    width: .8rem;
+    height: .8rem;
+    border-radius: 50%;
+    background-color: var(--bg);
+  }
 .txt{
     font-size: .8rem;
     font-weight: 400;
     margin-left: 1.25rem;
+}
+@media(hover:hover){
+    .menu:hover{
+        background-color: var(--gray-hv-bg-col);
+    }
+    .dropdown > .menu:hover::after{
+        transform: rotate(180deg);
+    }
 }

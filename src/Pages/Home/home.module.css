@@ -1,7 +1,4 @@
-.imgContainer{
-    position: relative;
-    width: 100%;
-}
+
 .img{
     position: absolute;
     left: 0;
@@ -20,8 +17,21 @@
     font-weight: 600;
     color: var(--white-bg-col);
 }
+.wrapper{
+    position: relative;
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 15rem));
+}
 @media(max-width: 600px){
     .imgContainer{
         width: 100vw;
+    }
+    .wrapper{
+        gap: .5rem;
+        grid-template-columns: repeat(auto-fit, minmax(10rem, 47%));
+    }
+    .container{
+        padding: 1rem;
     }
 }

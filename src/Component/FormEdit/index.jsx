@@ -6,33 +6,49 @@ import ButtonCstm from '../ButtonCstm';
 import { useForm } from '../../Helper/FormContext';
 
 export default function FormEdit() {
-    const {setIsOpenForm} = useForm()
-    const [name, setName] = useState('');
+    const {setIsOpenForm, isEditForm} = useForm();
+    const handler = isEditForm.status ? isEditForm.data.title : '';
+    const [name, setName] = useState(handler);
 
 
     function handleInput(e){
         setName(curr => e)
     }
 
+    function handleSubmit(e){
+        e.preventDefault();
+    }
+
   return (
     <div className={styles.container}>
         <div className={styles.formContainer}>
             <div className={styles.title}>
-                <h3>Tambah List item</h3>
+                <h3>{isEditForm.status ? 'Edit ' : 'Tambah '} List Item</h3>
                 <ButtonCstm
                     callback={()=> setIsOpenForm(curr => false)}>
                     <img src={close} alt='close'/>
                 </ButtonCstm>
             </div>
-            <form className={styles.form}>
+            <form 
+                className={styles.form} 
+                onSubmit={(e) => handleSubmit(e)}>
                 <div className={styles.formgroup}>
                     <h3>Nama List item</h3>
-                    <input value={name} onChange={(e) => handleInput(e.target.value)} type="text" placeholder='tambahkan nama list item' required/>
+                    <input 
+                        value={name} 
+                        onChange={(e) => handleInput(e.target.value)} 
+                        type="text" 
+                        placeholder='tambahkan nama list item' 
+                        required/>
                 </div>
-                <div className={styles.formgroup}>
-                    <h3>Priority</h3>
-                    <Dropdown type='prior' />
-                </div>
+
+                {!isEditForm.status && 
+                    <div className={styles.formgroup}>
+                        <h3>Priority</h3>
+                        <Dropdown type='prior' />
+                    </div>
+                }
+
                 <div 
                     className={styles.formgroup}
                     style={

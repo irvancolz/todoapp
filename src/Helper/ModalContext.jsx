@@ -7,7 +7,10 @@ export function useModal(){
 }
 
 export default function ModalContext({children}) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState({
+      status : false,
+      mode : 'todo'
+    });
     const [target, setTarget] = useState({});
 
 

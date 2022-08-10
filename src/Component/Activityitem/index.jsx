@@ -4,15 +4,20 @@ import deleteImg from '../../Assets/todo-item-delete-button.svg';
 import pen from '../../Assets/todo-title-edit-button.svg';
 import ButtonCstm from '../ButtonCstm';
 import { useModal } from '../../Helper/ModalContext';
+import { useForm } from '../../Helper/FormContext';
 
 export default function ActivityItem({content={}}) {
     const textRef = useRef();
     const inputRef = useRef();
     const [isActivityFinish, setIsActivityFinish] = useState(content.is_active);
+    const {setIsOpenForm,setIsEditForm,} = useForm();
 
     const {setIsOpen, setTarget,} = useModal();
     function handleDelete(){
-        setIsOpen(curr => true);
+        setIsOpen({
+            status : true,
+            mode: 'list item'
+        });
         setTarget({
             name: content.title,
             id: content.id,
@@ -20,8 +25,12 @@ export default function ActivityItem({content={}}) {
         })
     }
 
-    function handleEdit(){
-
+    function handleEdit(e){
+        setIsEditForm({
+            status: true,
+            data: e
+        });
+        setIsOpenForm(curr => true);
 
     }
 
@@ -54,13 +63,13 @@ export default function ActivityItem({content={}}) {
                     }
                 }>{content.title}</p>
             <ButtonCstm
-                callback={(e)=> handleEdit()}>
+                callback={()=> handleEdit(content)}>
                 <img src={pen} alt="edit" />
             </ButtonCstm>
         </div>
         <div className={styles.footer}>
             <ButtonCstm
-                callback={(e)=> handleDelete()}>
+                callback={()=> handleDelete()}>
                 <img src={deleteImg} alt="delete" />
             </ButtonCstm>
         </div>

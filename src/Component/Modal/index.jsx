@@ -5,11 +5,13 @@ import ButtonCstm from '../ButtonCstm';
 import { useModal } from '../../Helper/ModalContext';
 
 export default function Modal() {
-    const {target,setIsOpen,} = useModal();
+    const {target,setIsOpen, isOpen} = useModal();
     function handleAcc(e){
-        e.type === 'todo' ? console.log(e.type) : console.log(e.type);
+        e.mode === 'todo' ? console.log(e.mode) : console.log(e.mode);
 
-        setIsOpen(curr => false)
+        setIsOpen({
+            status : false,
+        })
     }
   return (
     <div className={styles.container}>
@@ -18,7 +20,7 @@ export default function Modal() {
                 <img src={modalDel} alt="alert" />
             </div>
             <div className={styles.body}>
-                <p>Apakah anda yakin menghapus list item</p>
+                <p>Apakah anda yakin menghapus {isOpen.mode}</p>
                 <p className={styles.boldTxt}>{`"${target.name}" ?`}</p>
             </div>
             <div className={styles.nav}>

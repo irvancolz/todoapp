@@ -8,22 +8,28 @@ import { useModal } from '../../Helper/ModalContext';
 export default function TodoItem({content={}}) {
     const {setIsOpen, setTarget,} = useModal();
     function handleDelete(){
-        setIsOpen(curr => true);
+        setIsOpen({
+            status : true,
+            mode: 'todo'
+        });
         setTarget({
-            name: content.name,
+            name: content.title,
             id: content.id,
             type: 'todo',
         })
     }
+
+    const created = new Date(content.created_at);
+    const created_at = created.toLocaleDateString('id-ID', { 'dateStyle' : 'long' });
   return (
     <div className={styles.container}>
         <Link to={`/Detail/${content.id}`}>
             <div className={styles.content}>
-                <h4>{content.name}</h4>
+                <h4>{content.title}</h4>
             </div>
         </Link>
             <div className={styles.footer}>
-                <span className={styles.date}>{content.created_at}</span>
+                <span className={styles.date}>{created_at}</span>
                 <ButtonCstm 
                     callback={() => handleDelete()}>
                         <img src={deleteImg} alt='delete'/>

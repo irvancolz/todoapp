@@ -24,6 +24,10 @@
     color: var(--white-bg-col);
 }
 .headerTitle h1{
+    max-width: 500px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     margin: 0 2.25rem 0 1.75rem;
 }
 .headerTitle a{
@@ -32,30 +36,90 @@
     align-items: center;
 }
 .wrapper{
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: .7rem;
 }
+.filter{
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 1rem;
+    width: 300px;
+}
+.filter > div{
+    opacity: 0;
+    transition: opacity .4s ease-in-out;
+}
+.filter > div:target{
+    opacity: 1;
+}
+.filter a{
+    border: 1px solid var(--shadow-bg-col);
+    width: 3.25rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+.sortContainer{
+    display: flex;
+    align-items: center;
+    gap: 1.15rem;
+}
+.input{
+    overflow: hidden;
+    font-weight: 800;
+    padding: 0 2.25rem 0 1.75rem;
+    border: 2px solid transparent;
+    outline: 2px solid transparent;
+    background-color: transparent;
+}
+.input:focus{
+    border-bottom: 1px solid var(--main-text-col);
+}
 @media(max-width: 600px){
+    .container{
+        padding: .5rem;
+    }
     .imgContainer{
         width: 100vw;
     }
     .header{
-        margin: 1rem 1.5rem;
+        margin: 1rem .25rem;
         gap: 1.5rem;
     }
     .header > div:nth-child(2){
-        margin-left: auto;
+        width: 100%;
+    }
+    .sortContainer{
+        align-items: flex-start;
+    }
+    .filter{
+        flex-direction: column;
+    }
+    .filter > *:first-child{
+        align-self: flex-end;
     }
     .headerTitle{
         padding: .8rem 0;
         flex-basis: 100%;
         min-width: 100%;
     }
-    .headerTitle > a img{
+    .headerTitle > img {
         display: none;
     }
-    .headerTitle h1{
-        margin: 0 1rem;
+    .txt{
+        font-size: .8rem;
+        font-weight: 600;
+    }
+    .headerTitle h1, .input{
+        font-weight: 600;
+        margin-left: 1rem;
+    }
+    .input{
+        max-width: 15rem;
     }
 }

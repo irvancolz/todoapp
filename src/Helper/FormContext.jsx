@@ -8,11 +8,14 @@ export function useForm(){
 
 export default function FormContext({children}) {
     const [isOpenForm, setIsOpenForm] = useState(false);
+    const [isEditForm, setIsEditForm] = useState({status: false,});
   return   (
     <Form.Provider
         value={{
             isOpenForm,
+            isEditForm,
             setIsOpenForm,
+            setIsEditForm,
         }}>
         {children}
     </Form.Provider>

@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
 :root{
+  scroll-padding-top: 5rem;
+  scroll-behavior: smooth;
   font-size: 16px;
   --very-high-prior-col: rgba(237, 76, 92, 1);
   --high-prior-col: rgba(248, 165, 65, 1);
@@ -10,8 +12,9 @@
   --white-bg-col: rgba(255, 255, 255, 1);
   --gray-bg-col: #f4f4f4;
   --passive-text-col: rgba(136, 136, 136, 1);
-  ---main-text-col: rgba(17, 17, 17, 1);
+  --main-text-col: rgba(17, 17, 17, 1);
   --shadow-bg-col: rgba(0, 0, 0, 0.1);
+  --gray-hv-bg-col: rgba(229, 229, 229, 1);
 }
 *{
   margin: 0;
@@ -74,5 +77,9 @@ button{
     }
     .App .container:nth-child(2){
       padding: 0;
+    }
+    .title{
+      font-size: 1.5rem;
+      font-weight: 600;
     }
   }
