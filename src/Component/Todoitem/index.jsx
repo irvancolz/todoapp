@@ -6,16 +6,16 @@ import ButtonCstm from '../ButtonCstm';
 import { useModal } from '../../Helper/ModalContext';
 
 export default function TodoItem({content={}}) {
-    const {setIsOpen, setTarget,} = useModal();
+    const {setIsOpen, setTargetModal,} = useModal();
     function handleDelete(){
         setIsOpen({
             status : true,
             mode: 'activity'
         });
-        setTarget({
+        setTargetModal({
             name: content.title,
             id: content.id,
-            type: 'activity',
+            mode: 'todo',
         })
     }
 

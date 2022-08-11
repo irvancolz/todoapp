@@ -6,38 +6,89 @@ import plus from '../../Assets/tabler_plus.png';
 import pen from '../../Assets/todo-title-edit-button.svg';
 import chev from '../../Assets/todo-back-button.svg';
 import { Link } from "react-router-dom";
-import Dropdown from '../../Component/Dropdown';
 import {useForm} from '../../Helper/FormContext';
 import sortIcon from '../../Assets/tabler_arrows-sort.png';
 import {useParams} from 'react-router-dom';
-import { getActivityList } from '../../Helper/Todo';
+import { getActivityList, updateTodo } from '../../Helper/Todo';
 
 export default function TodoPages() {
   const inputRef = useRef()
   const TodoId = useParams();
-  const { setIsOpenForm, setIsEditForm } = useForm();
-  const {ActivityItem,ButtonCstm} = Component();
+  const { setIsOpenForm, setIsEditForm, setTarget } = useForm();
+  const {ActivityItem,ButtonCstm, Dropdown} = Component();
   const [title, setTitle] = useState('');
   const [dummy, setDummy] = useState([]);
   const [todo, setTodo] = useState({});
+  const [filter, setFilter] = useState('terbaru');
   const [isEdit, setIsEdit] = useState(false);
 
   useEffect(()=>{
     setTitle(curr => todo.title)
   },[todo.title]);
 
+
+  function filterActivity(key){
+    if(key === 'za'){
+      dummy.sort((a,b)=>{
+        let fa = a.title.toLowerCase(),
+        fb = b.title.toLowerCase();
+
+        if (fa < fb) {
+            return 1;
+        }
+        if (fa > fb) {
+            return -1;
+        }
+        return 0;
+      })
+    }else if(key === 'az'){
+      dummy.sort((a,b)=>{
+        let fa = a.title.toLowerCase(),
+        fb = b.title.toLowerCase();
+
+        if (fa < fb) {
+            return -1;
+        }
+        if (fa > fb) {
+            return 1;
+        }
+        return 0;
+      })
+    }else if(key === 'belum'){
+      dummy.sort((a,b)=>{
+          return a.is_active - b.is_active
+      })
+    }else if(key === 'terlama'){
+      dummy.sort((a,b)=>{
+        return a.id - b.id
+      })
+    }else{
+      dummy.sort((a,b)=>{
+          return b.id - a.id
+      })
+    }
+  }
+
   useEffect(()=>{
     getActivityList(TodoId.id).then(res => res.json()).then(data => {
       setTodo({...data});
       setDummy([...data.todo_items]);
     })
-  },[TodoId.id])
+  })
     
     function handleNew(){
-      setIsOpenForm(curr => true);
+      setIsOpenForm({status: true});
+      setTarget({activity_group_id : TodoId.id})
       setIsEditForm({
         status: false,
       })
+    }
+    function handleNameChange(){
+      const data= {
+        title: inputRef.current.value,
+      }
+      setTitle(inputRef.current.value)
+      updateTodo(TodoId.id,data )
     }
 
     function handleEdit(e){
@@ -63,7 +114,7 @@ export default function TodoPages() {
                   ref={inputRef}
                   type="text" 
                   value={title} 
-                  onChange={() => setTitle(curr => inputRef.current.value)}
+                  onChange={() => handleNameChange()}
                   className={`${styles.input} title`}/>  
               </div>
           :
@@ -85,7 +136,7 @@ export default function TodoPages() {
               <img src={sortIcon} alt="filter" />
             </a>
             <div id='filter'>
-              <Dropdown type='sort' />
+              <Dropdown type='sort' callback={(e) => setFilter(e)}/>
             </div>
           </div>
           <ButtonCstm
@@ -100,6 +151,7 @@ export default function TodoPages() {
       <div className={styles.wrapper} data-cy='Item List'>
         {dummy.length > 0 ?
           dummy.map(item =>{
+            filterActivity(filter)
             return(
               <ActivityItem key={item.id} content={item} />
             )

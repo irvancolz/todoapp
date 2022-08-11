@@ -11,46 +11,55 @@ export default function ActivityItem({content={}}) {
     const textRef = useRef();
     const inputRef = useRef();
     const [isActivityFinish, setIsActivityFinish] = useState(content.is_active);
-    const {setIsOpenForm,setIsEditForm,} = useForm();
+    const {setIsOpenForm,setIsEditForm, setTarget} = useForm();
 
-    const {setIsOpen, setTarget,} = useModal();
+    const {setIsOpen, setTargetModal} = useModal();
     function handleDelete(){
         setIsOpen({
             status : true,
-            mode: 'list item'
+            mode: 'list item',
         });
-        setTarget({
+        setTargetModal({
             name: content.title,
             id: content.id,
-            type: 'todo',
+            mode: 'activity'
         })
     }
 
     function handleEdit(e){
         setIsEditForm({
             status: true,
-            data: e
         });
-        setIsOpenForm(curr => true);
+        setIsOpenForm({
+            status: true,
+        });
+        setTarget({
+            id: e.id,
+            activity_group_id: content.activity_group_id,
+            data: e,
+        })
 
     }
     function handleActivity(){
-        setIsActivityFinish(curr => !curr);
         const data ={
-            is_active : isActivityFinish
+            is_active : isActivityFinish ? 0 : 1,
+            activity_group_id: content.activity_group_id,
         }
-        updateActivity(content.id, data).then(res => console.log(res))
+        updateActivity(content.id, data)
     }
 
   return (
     <div className={styles.container}>
         <div className={styles.body}>
+            <label>
             <input 
                 type="checkbox" 
                 name="finish" 
                 id="finish"
                 ref={inputRef}
-                onChange={(e) => handleActivity()} 
+                onChange={(e) =>{ 
+                    setIsActivityFinish(curr => !curr);
+                    handleActivity()}} 
                 checked={isActivityFinish} />
             <span 
                 className={styles.prior}
@@ -70,6 +79,7 @@ export default function ActivityItem({content={}}) {
                         color: `${isActivityFinish ? 'var(--passive-text-col)' : 'var(--main-text-col)'}`
                     }
                 }>{content.title}</p>
+            </label>
             <ButtonCstm
                 callback={()=> handleEdit(content)}>
                 <img src={pen} alt="edit" />
@@ -77,7 +87,7 @@ export default function ActivityItem({content={}}) {
         </div>
         <div className={styles.footer}>
             <ButtonCstm
-                callback={()=> handleDelete()}>
+                callback={()=> handleDelete(content.id)}>
                 <img src={deleteImg} alt="delete" />
             </ButtonCstm>
         </div>

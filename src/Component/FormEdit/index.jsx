@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, {useState } from 'react';
 import Dropdown from '../Dropdown';
 import styles from './form.module.css';
 import close from '../../Assets/close.png';
 import ButtonCstm from '../ButtonCstm';
 import { useForm } from '../../Helper/FormContext';
+import { createActivity, updateActivity } from '../../Helper/Todo';
 
 export default function FormEdit() {
-    const {setIsOpenForm, isEditForm} = useForm();
-    const handler = isEditForm.status ? isEditForm.data.title : '';
+    const {setIsOpenForm, isEditForm, target} = useForm();
+    const handler = isEditForm.status ? target.data.title : '';
     const [name, setName] = useState(handler);
+    const [priority, setPriority] = useState();
 
 
     function handleInput(e){
@@ -17,7 +19,24 @@ export default function FormEdit() {
 
     function handleSubmit(e){
         e.preventDefault();
-        console.log(e)
+        if(!isEditForm.status){
+            const data ={
+                activity_group_id : target.activity_group_id,
+                title : name,
+                priority,
+                is_active: 0,
+            }
+            createActivity(data)
+        }else{
+            const data ={
+                title : name,
+                activity_group_id: target.data.activity_group_id,
+            }
+            updateActivity(target.id, data)
+            
+        }
+
+        setIsOpenForm({status : false})
     }
 
   return (
@@ -46,7 +65,7 @@ export default function FormEdit() {
                 {!isEditForm.status && 
                     <div className={styles.formgroup} data-cy='Tambah List item - priority'>
                         <h3>Priority</h3>
-                        <Dropdown type='prior'/>
+                        <Dropdown type='prior' callback={(e) => setPriority(e)} />
                     </div>
                 }
 
@@ -60,10 +79,8 @@ export default function FormEdit() {
                     <ButtonCstm
                         variant='primary'
                         bgCol='blue'
-                        callback={(e)=> handleSubmit(e)}>
-                        <button type="submit">
-                            <p>Simpan</p>
-                        </button>
+                        btnType='submit'>
+                        <p>Simpan</p>
                     </ButtonCstm>
                 </div>
 

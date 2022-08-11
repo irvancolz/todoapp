@@ -6,54 +6,65 @@ import sortNew from '../../Assets/sort-new.png';
 import sortNotF from '../../Assets/sort-not-finished.png';
 import sortLast from '../../Assets/sort-last.png';
 
-export default function Dropdown({type = 'sort', txt='--pilih--'}) {
+export default function Dropdown({type = 'sort', txt='--pilih--', callback=''}) {
     const [select, setSelect] = useState({
         name: txt,
         icon: sortA,
+        value: 'very-high',
         color: '--very-high-prior-col',
     });
     const [openOption, setOpenOption] = useState(false);
     const sort =[
         {
             name: 'Terbaru',
+            value: 'terbaru',
             icon: sortNew,
         },
         {
             name: 'Terlama',
+            value: 'terlama',
             icon: sortLast,
         },
         {
             name: 'A-Z',
+            value: 'az',
             icon: sortA,
         },
         {
             name: 'Z-A',
+            value: 'za',
             icon: sortZ,
         },
         {
             name: 'Belum Selesai',
+            value: 'belum',
             icon: sortNotF,
         },
     ]
     const priority =[
         {
             name: 'Very High',
+            value: 'very-high',
             color: '--very-high-prior-col',
         },
         {
             name: 'High',
+            value: 'high',
             color: '--high-prior-col',
         },
         {
             name: 'Medium',
+            value: 'normal',
             color: '--medium-prior-col',
         },
         {
             name: 'Low',
+            value: 'low',
             color: '--low-prior-col',
         },
         {
             name: 'Very Low',
+            value: 'very-low',
             color: '--very-low-prior-col',
         },
     ]
@@ -61,6 +72,7 @@ export default function Dropdown({type = 'sort', txt='--pilih--'}) {
     function handleChange(e){
         setOpenOption(false);
         setSelect(e);
+        callback(e.value)
     }
   return (
     <div className={styles.container}>

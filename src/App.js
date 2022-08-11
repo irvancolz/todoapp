@@ -4,6 +4,7 @@ import './App.css';
 import Component from './Component';
 import { useModal } from './Helper/ModalContext';
 import { useForm } from './Helper/FormContext';
+import { useAlert } from './Helper/AlertContext';
 const TodoPages = React.lazy(() => import('./Pages/Todo'));
 const HomePages = React.lazy(() => import('./Pages/Home'));
 
@@ -11,13 +12,14 @@ function App() {
   const {Header, Modal, FormEdit, Alert} = Component();
   const {isOpen} = useModal();
   const {isOpenForm} = useForm();
+  const {isAlert} = useAlert();
 
 
   return (
     <div className="App">
       <Header />
-      <Alert />
-      {isOpenForm &&<FormEdit />}
+      {isAlert.status && <Alert />}
+      {isOpenForm.status &&<FormEdit />}
       {isOpen.status && <Modal />}
 
       <div className='container'>

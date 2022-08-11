@@ -7,7 +7,7 @@
     box-shadow: 0 .35rem .7rem var(--shadow-bg-col);
     transition: box-shadow .3s ease-in-out; 
 }
-.body{
+.body, .body label{
     display: flex;
     justify-content: center;
     align-items: center;

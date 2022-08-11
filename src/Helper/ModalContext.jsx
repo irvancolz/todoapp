@@ -11,16 +11,20 @@ export default function ModalContext({children}) {
       status : false,
       mode : 'todo'
     });
-    const [target, setTarget] = useState({});
+    const [targetModal, setTargetModal] = useState({
+      name: '',
+      id: 0,
+      mode: 'activity'
+    });
 
 
   return (
     <Modal.Provider
     value={{
         isOpen,
-        target,
+        targetModal,
         setIsOpen,
-        setTarget,
+        setTargetModal,
     }}
     >
         {children}

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './button.module.css';
 
-export default function ButtonCstm({children, callback='', variant='ternary', bgCol='none' }) {
+export default function ButtonCstm({children, callback='', variant='ternary', bgCol='none',btnType='button' }) {
   return (
     <div 
     className={`${styles.container } 
@@ -13,7 +13,13 @@ export default function ButtonCstm({children, callback='', variant='ternary', bg
         <button
             className={
               `${styles.btn} ${bgCol === 'red' || bgCol === 'blue' ? styles.white : styles.default}`}
-            onClick={()=> callback()}
+            onClick={()=>{
+              if(callback !== ''){
+                callback()
+              }
+              return
+            }}
+            type={btnType}
             >
             {children}
         </button>

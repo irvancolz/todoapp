@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import ModalContext from './Helper/ModalContext';
 import FormContext from './Helper/FormContext';
+import AlertContext from './Helper/AlertContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,7 +14,9 @@ root.render(
     <BrowserRouter>
       <ModalContext>
       <FormContext>
+      <AlertContext>
         <App />
+      </AlertContext>
       </FormContext>
       </ModalContext>
     </BrowserRouter>

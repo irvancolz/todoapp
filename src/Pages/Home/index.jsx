@@ -11,9 +11,6 @@ export default function HomePages() {
 
     function handleNew(){
       createTodo()
-      .then(res => res.json())
-      .then(data => console.log(data))
-      .catch(err => console.log(err))
     }
     
     useEffect(()=>{
@@ -35,6 +32,9 @@ export default function HomePages() {
       <div className={styles.wrapper} data-cy='Dashboard New Item'>        
         {dummy.length > 0 ?
           dummy.map(item =>{
+            dummy.sort((a,b)=>{
+              return a.id -b.id
+            })
             return(
               <TodoItem key={item.id} content={item} />
             )

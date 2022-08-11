@@ -1,0 +1,35 @@
+.container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    border: 1px solid #000;
+    width: 100%;
+    height: 100%;
+}
+.alert{
+    width: 100%;
+    margin: 1rem auto;
+    max-width: 20rem;
+    padding: 1.3rem 1.8rem;
+    display: flex;
+    gap: .75rem;
+    background-color: var(--white-bg-col);
+    border-radius: .75rem;
+    box-shadow: 0rem .4rem .6rem var(--shadow-bg-col);
+    animation: fade-in .5s ease-in-out;
+}
+
+@keyframes fade-in{
+    0%{
+        opacity: 0;
+        transform: translateY(-3rem);
+    }50%{
+        opacity: 1;
+    }
+    90%{
+        transform: translateY(.5rem);
+    }100%{
+        transform: translateY(0);
+    }
+}
+
