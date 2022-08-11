@@ -3,14 +3,17 @@ import styles from './home.module.css';
 import Component from '../../Component';
 import emptyImg from '../../Assets/activity-empty-state.svg';
 import plus from '../../Assets/tabler_plus.png';
-import { getTodoList } from '../../Helper/Todo';
+import { getTodoList,createTodo } from '../../Helper/Todo';
 
 export default function HomePages() {
   const {TodoItem, ButtonCstm} = Component();
   const [dummy, setDummy] = useState([]);
 
     function handleNew(){
-
+      createTodo()
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
     }
     
     useEffect(()=>{
@@ -18,7 +21,7 @@ export default function HomePages() {
   })
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-cy={`Dashboard ${dummy.length > 0 ? 'Dashboard New Item' : 'Dashboard Empty State'}`}>
       <div className={styles.header}>
         <h1 className="title">Activity</h1>
         <ButtonCstm
@@ -29,7 +32,7 @@ export default function HomePages() {
             <p className={styles.txt}>Tambah</p>
         </ButtonCstm>
       </div>
-      <div className={styles.wrapper}>        
+      <div className={styles.wrapper} data-cy='Dashboard New Item'>        
         {dummy.length > 0 ?
           dummy.map(item =>{
             return(
@@ -40,7 +43,7 @@ export default function HomePages() {
           <div 
             onClick={()=> handleNew()}
             className={styles.imgContainer}>
-            <img className={styles.img} src={emptyImg} alt='your todo is empty' /> 
+            <img className={styles.img} src={emptyImg} alt='your todo is empty' data-cy='Activity Empty State'/> 
           </div>
           }
       </div>

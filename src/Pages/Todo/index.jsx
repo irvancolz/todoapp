@@ -31,7 +31,7 @@ export default function TodoPages() {
       setTodo({...data});
       setDummy([...data.todo_items]);
     })
-  },[])
+  },[TodoId.id])
     
     function handleNew(){
       setIsOpenForm(curr => true);
@@ -53,7 +53,7 @@ export default function TodoPages() {
     }
 
     return (
-      <div className={styles.container}>
+      <div className={styles.container} data-cy={dummy.length === 0 ? 'Item List - Empty State' : 'Item List - Done'}>
       <div className={styles.header}>
         <div className={styles.headerTitle}>
           {isEdit ? 
@@ -68,7 +68,7 @@ export default function TodoPages() {
               </div>
           :
             <Link to={'/'}>
-              <img src={chev} alt="back" />
+              <img src={chev} alt="back" data-cy='todo-title-back-button'/>
                 <h1 className="title">
                   {title}
                 </h1>           
@@ -76,7 +76,7 @@ export default function TodoPages() {
           }
           <ButtonCstm
             callback={(e) => handleEdit()}>
-            <img src={pen} alt="edit" />
+            <img src={pen} alt="edit" data-cy='todo-title-edit-button'/>
           </ButtonCstm>
         </div>
         <div className={styles.sortContainer}>
@@ -97,7 +97,7 @@ export default function TodoPages() {
           </ButtonCstm>
         </div>
       </div>
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} data-cy='Item List'>
         {dummy.length > 0 ?
           dummy.map(item =>{
             return(
@@ -108,7 +108,7 @@ export default function TodoPages() {
         <div 
           onClick={(e)=> handleNew()}
           className={styles.imgContainer}>
-            <img className={styles.img} src={emptyImg} alt='your todo is empty' /> 
+            <img className={styles.img} src={emptyImg} alt='your todo is empty' data-cy='todo-empty-state'/> 
         </div>
       }
       </div>

@@ -8,7 +8,7 @@ const TodoPages = React.lazy(() => import('./Pages/Todo'));
 const HomePages = React.lazy(() => import('./Pages/Home'));
 
 function App() {
-  const {Header, Modal, FormEdit} = Component();
+  const {Header, Modal, FormEdit, Alert} = Component();
   const {isOpen} = useModal();
   const {isOpenForm} = useForm();
 
@@ -16,8 +16,9 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <Alert />
       {isOpenForm &&<FormEdit />}
-      {isOpen && <Modal />}
+      {isOpen.status && <Modal />}
 
       <div className='container'>
           <Suspense fallback={<p>loading...</p>}>

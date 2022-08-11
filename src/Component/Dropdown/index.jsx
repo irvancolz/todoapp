@@ -86,7 +86,7 @@ export default function Dropdown({type = 'sort', txt='--pilih--'}) {
            }
             </div>
             {openOption && 
-                <div className={styles.wrapper}>
+                <div className={styles.wrapper} data-cy='sort'>
                     {type === 'sort' ? sort.map((item,index) =>{
                         return(
                         <label key={index} 

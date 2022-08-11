@@ -10,12 +10,12 @@ export default function TodoItem({content={}}) {
     function handleDelete(){
         setIsOpen({
             status : true,
-            mode: 'todo'
+            mode: 'activity'
         });
         setTarget({
             name: content.title,
             id: content.id,
-            type: 'todo',
+            type: 'activity',
         })
     }
 

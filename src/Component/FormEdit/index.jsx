@@ -17,11 +17,12 @@ export default function FormEdit() {
 
     function handleSubmit(e){
         e.preventDefault();
+        console.log(e)
     }
 
   return (
     <div className={styles.container}>
-        <div className={styles.formContainer}>
+        <div className={styles.formContainer} data-cy={`${name.length > 0 ? 'Tambah List Item - Active' : 'Tambah List item - Unactive'}`}>
             <div className={styles.title}>
                 <h3>{isEditForm.status ? 'Edit ' : 'Tambah '} List Item</h3>
                 <ButtonCstm
@@ -43,9 +44,9 @@ export default function FormEdit() {
                 </div>
 
                 {!isEditForm.status && 
-                    <div className={styles.formgroup}>
+                    <div className={styles.formgroup} data-cy='Tambah List item - priority'>
                         <h3>Priority</h3>
-                        <Dropdown type='prior' />
+                        <Dropdown type='prior'/>
                     </div>
                 }
 
@@ -58,8 +59,11 @@ export default function FormEdit() {
                     }>
                     <ButtonCstm
                         variant='primary'
-                        bgCol='blue'>
-                        <p>Simpan</p>
+                        bgCol='blue'
+                        callback={(e)=> handleSubmit(e)}>
+                        <button type="submit">
+                            <p>Simpan</p>
+                        </button>
                     </ButtonCstm>
                 </div>
 

@@ -5,6 +5,7 @@ import pen from '../../Assets/todo-title-edit-button.svg';
 import ButtonCstm from '../ButtonCstm';
 import { useModal } from '../../Helper/ModalContext';
 import { useForm } from '../../Helper/FormContext';
+import { updateActivity } from '../../Helper/Todo';
 
 export default function ActivityItem({content={}}) {
     const textRef = useRef();
@@ -33,6 +34,13 @@ export default function ActivityItem({content={}}) {
         setIsOpenForm(curr => true);
 
     }
+    function handleActivity(){
+        setIsActivityFinish(curr => !curr);
+        const data ={
+            is_active : isActivityFinish
+        }
+        updateActivity(content.id, data).then(res => console.log(res))
+    }
 
   return (
     <div className={styles.container}>
@@ -42,7 +50,7 @@ export default function ActivityItem({content={}}) {
                 name="finish" 
                 id="finish"
                 ref={inputRef}
-                onChange={(e) => setIsActivityFinish(curr => !curr)} 
+                onChange={(e) => handleActivity()} 
                 checked={isActivityFinish} />
             <span 
                 className={styles.prior}

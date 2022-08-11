@@ -6,16 +6,18 @@ import { useModal } from '../../Helper/ModalContext';
 
 export default function Modal() {
     const {target,setIsOpen, isOpen} = useModal();
+
     function handleAcc(e){
-        e.mode === 'todo' ? console.log(e.mode) : console.log(e.mode);
+        e.mode === 'activity' ? console.log(e.mode) : console.log(e.mode);
 
         setIsOpen({
             status : false,
         })
     }
+
   return (
     <div className={styles.container}>
-        <div className={styles.modal}>
+        <div className={styles.modal} data-cy={`${target.mode === 'activity' ? 'Delete Activity' : 'Delete List Item'}`}>
             <div className={styles.header}>
                 <img src={modalDel} alt="alert" />
             </div>

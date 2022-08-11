@@ -1,6 +1,9 @@
 .imgContainer{
-    position: relative;
-    width: 100%;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 50%;
 }
 .img{
     position: absolute;
@@ -70,6 +73,7 @@
     gap: 1.15rem;
 }
 .input{
+    font-family: 'Poppins', sans-serif;
     overflow: hidden;
     font-weight: 800;
     padding: 0 2.25rem 0 1.75rem;
